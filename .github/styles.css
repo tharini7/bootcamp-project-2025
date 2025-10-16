@@ -313,4 +313,14 @@ form {
   max-height: 400px; 
   display: block;
 }
+#blog-container{
+  max-width: 800px;
+  margin:40px auto;
+  padding: 0 20px;
+}
+
+.blog-class-container {
+  background-color: #f590b4;
+  border: 1px solid #f8f8f8;
+}
 
