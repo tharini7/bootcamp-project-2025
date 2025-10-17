@@ -34,11 +34,11 @@ const blogs: Blog[] = [
     slug: "IntroBlog",
   },
   {
-    title: "Introduction Blog Post",
+    title: "Second Blog Post: Farmers Market",
     date: "10/16/2025",
-    description: "This is my first blog post",
+    description: "Farmers Market!",
     image: "image link temp",
-    imageAlt: "This image is a picutre of me",
+    imageAlt: "Image at the farmers market",
     slug: "SecondBlog",
   },
 ]
@@ -50,6 +50,7 @@ const blogs: Blog[] = [
       blogDiv.className = "blog-class-container"
 
       const title = document.createElement("h1");
+      
       const titleLink = document.createElement("a");
       titleLink.href = `blogs/${blog.slug}.html`;
       titleLink.textContent = blog.title;
