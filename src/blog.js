@@ -6,7 +6,7 @@
  * This is a key feature of TypeScript; it ensures that every element in the array has
  * `title` etc and that they are all strings.
  */
-console.log("JS is loaded");
+console.log("blog.js loaded successfully");
 var blogs = [
     {
         title: "Introduction Blog Post",
