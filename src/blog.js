@@ -6,7 +6,6 @@
  * This is a key feature of TypeScript; it ensures that every element in the array has
  * `title` etc and that they are all strings.
  */
-console.log("blog.js loaded successfully");
 var blogs = [
     {
         title: "Introduction Blog Post",
@@ -14,7 +13,7 @@ var blogs = [
         description: "This is my first blog post",
         image: "image link temp",
         imageAlt: "This image is a picutre of me",
-        slug: "link",
+        slug: "IntroBlog",
     },
     {
         title: "Introduction Blog Post",
@@ -22,7 +21,7 @@ var blogs = [
         description: "This is my first blog post",
         image: "image link temp",
         imageAlt: "This image is a picutre of me",
-        slug: "link",
+        slug: "SecondBlog",
     },
 ];
 var blogContainer = document.getElementById("blog-container");
@@ -30,7 +29,10 @@ blogs.forEach(function (blog) {
     var blogDiv = document.createElement("div");
     blogDiv.className = "blog-class-container";
     var title = document.createElement("h1");
-    title.textContent = blog.title;
+    var titleLink = document.createElement("a");
+    titleLink.href = "blogs/".concat(blog.slug, ".html");
+    titleLink.textContent = blog.title;
+    title.appendChild(titleLink);
     var date = document.createElement("p");
     date.textContent = blog.date;
     var description = document.createElement("p");

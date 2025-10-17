@@ -31,7 +31,7 @@ const blogs: Blog[] = [
     description: "This is my first blog post",
     image: "image link temp",
     imageAlt: "This image is a picutre of me",
-    slug: "link",
+    slug: "IntroBlog",
   },
   {
     title: "Introduction Blog Post",
@@ -39,7 +39,7 @@ const blogs: Blog[] = [
     description: "This is my first blog post",
     image: "image link temp",
     imageAlt: "This image is a picutre of me",
-    slug: "link",
+    slug: "SecondBlog",
   },
 ]
 
@@ -50,7 +50,10 @@ const blogs: Blog[] = [
       blogDiv.className = "blog-class-container"
 
       const title = document.createElement("h1");
-      title.textContent = blog.title;
+      const titleLink = document.createElement("a");
+      titleLink.href = `blogs/${blog.slug}.html`;
+      titleLink.textContent = blog.title;
+      title.appendChild(titleLink);
 
       const date = document.createElement("p");
       date.textContent = blog.date;
@@ -64,10 +67,6 @@ const blogs: Blog[] = [
 
       const slug = document.createElement("p");
       slug.textContent = blog.slug;
-
-        const titleLink = document.createElement("a");
-        titleLink.href = `blogs/${blog.slug}.html`;
-        titleLink.textContent = blog.title
 
       blogDiv.append (title, date, description, image);
 
