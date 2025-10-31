@@ -1,3 +1,5 @@
+@import "tailwindcss";
+/* using global css for all the non components*/
 :root {
   /* variables */
   --cg-black: rgb(30, 32, 32);
@@ -174,13 +176,13 @@ main {
   background-color: #f8f8f8;
   border: 1px solid #ccc;
   border-radius: 5px;
-  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+
 }
 
 .about-image img {
   max-width: 300px;
   border-radius: 3px;
-  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
+
 }
 
 .about-text {
@@ -323,4 +325,16 @@ form {
   background-color: #f590b4;
   border: 1px solid #f8f8f8;
 }
+.blog-box-title a{
+  color:black;
+display: inline-block; 
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-align: center;
+}
 
+.blog-box-title a:hover {
+  text-decoration: underline;
+}
