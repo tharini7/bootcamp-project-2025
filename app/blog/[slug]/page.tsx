@@ -1,0 +1,55 @@
+import Comment from "@/components/Comment";
+
+type Props = {
+   params: Promise<{ slug: string }>;
+}
+
+
+async function getBlog(slug: string) {
+	try {
+		// This fetches the blog from an api endpoint that would GET the blog
+		const res = await fetch(`http://localhost:3000/api/blog/${slug}`, {
+			cache: "no-store",	
+		})
+		// This checks that the GET request was successful
+		if (!res.ok) {
+			throw new Error("Failed to fetch blog");
+		}
+
+		return res.json();
+	} catch (err: unknown) {
+		console.log(`error: ${err}`);
+		return null;
+		// `` are a special way of allowing JS inside a string
+		// Instead of "error: " + err, we can just do the above
+		// it is simular to formated strings in python --> f"{err}"
+	}
+}
+
+export default async function Blog({ params }: Props) {
+  const { slug } = await params;
+  const blog = await getBlog(slug);
+
+    
+    	{/* Check if blog exists */}
+		if (blog){
+            return (
+                <div>
+                    <h1>{blog.title}</h1>
+                    <p>{blog.date}</p>
+                    <p>{blog.description}</p>
+                    {blog.image && (
+                        <img src={blog.image} alt={blog.image_alt ?? blog.title} />
+                    )}
+                    <p>{blog.imageAlt}</p>
+            <       p>{blog.slug}</p>
+                    {blog.comments.map((comment: any, index: number) => (
+                        <Comment key={index} comment={comment} />
+                    ))}
+                </div>
+                );
+		}
+		return <p>Blog not found</p>;
+
+
+}

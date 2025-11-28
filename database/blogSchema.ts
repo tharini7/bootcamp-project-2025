@@ -6,12 +6,18 @@ type Blog = {
 		date: Date;
 		description: string; // for preview
 	  image: string; // url for string in public
-	  image_alt: string; // alt for image
+	  imageAlt: string; // alt for image
       slug: string;
       content: string; // text content for individual blog page
-		//comments: IComment[]; // array for comments
+		comments: IComment[]; // array for comments
+
 };
 
+type IComment = {
+		user: string;
+		comment: string;
+		time: Date;
+}
 
 // mongoose schema 
 const blogSchema = new Schema<Blog>({
@@ -19,9 +25,16 @@ const blogSchema = new Schema<Blog>({
 		date: { type: Date, required: false, default: new Date()},
 		description: { type: String, required: true },
 		image: { type: String, required: true },
-	  image_alt: { type: String, required: true },
+	  imageAlt: { type: String, required: true },
       slug: { type: String, required: true },
 		content: { type: String, required: true },
+		comments: [
+			{
+				user: {type:String, required: true},
+				comment: {type : String, required: true},
+				time: {type: Date, required: true, default: new Date()}
+			}
+		],
 })
 
 // defining the collection and model
