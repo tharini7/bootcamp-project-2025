@@ -28,3 +28,4 @@ export async function POST(req: NextRequest,{params}: {params: Promise<{ slug: s
 
   return NextResponse.json("Comment added");
 }
+//test
