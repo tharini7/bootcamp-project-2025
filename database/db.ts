@@ -11,6 +11,7 @@ let connection: typeof mongoose;
  */
 const connectDB = async () => {
   if (!connection) {
+    console.log("MONGO_URI at runtime:", process.env.MONGO_URI);
     connection = await mongoose.connect(url);
     return connection;
   }
