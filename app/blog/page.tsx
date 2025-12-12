@@ -1,6 +1,7 @@
 import BlogPreview from '@/components/blogPreview';
 import connectDB from "@/database/db";
 import BlogModel from "@/database/blogSchema";
+export const dynamic = "force-dynamic";
 
 export const metadata = { title: "Tharini - Blog" };
 
