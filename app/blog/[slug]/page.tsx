@@ -1,55 +1,55 @@
+import connectDB from "@/database/db";
+import BlogModel from "@/database/blogSchema";
 import Comment from "@/components/Comment";
+import CommentForm from "./commentForm";
+
 
 type Props = {
-   params: Promise<{ slug: string }>;
+  params: Promise<{slug: string}>;
+};
+
+
+export default async function Blog({params}: Props) {
+  const {slug} = await params;
+
+  await connectDB();
+  const blog: any = await BlogModel.findOne({slug}).lean();
+
+  if (!blog) {
+    return (
+        <h1>Blog not found</h1>
+    );
+  }
+
+  return (
+    <main>
+      <h1>{blog.title}</h1>
+      <p>{String(blog.date)}</p>
+      <p>{blog.description}</p>
+
+      {blog.image && (
+        <img src={blog.image} alt={blog.imageAlt ?? blog.title} />
+      )}
+      <p>{blog.content}</p>
+
+      <h3>Comments</h3>
+            {blog.comments.length === 0 && (
+              <p>No comments yet</p>
+            )}
+            {blog.comments.length > 0 && (
+              <div>
+                {blog.comments.map((comment:any , index:number) => (
+                  <div key={index}>
+                    <strong>{comment.user}</strong>
+                    <p>{comment.comment}</p>
+                    <p>{new Date(comment.time).toLocaleString()}</p>
+                    <hr />
+                  </div>
+                ))}
+              </div>
+            )}
+      <CommentForm slug={slug} />
+    </main>
+  );
 }
 
-
-async function getBlog(slug: string) {
-	try {
-		// This fetches the blog from an api endpoint that would GET the blog
-		const res = await fetch(`http://localhost:3000/api/blog/${slug}`, {
-			cache: "no-store",	
-		})
-		// This checks that the GET request was successful
-		if (!res.ok) {
-			throw new Error("Failed to fetch blog");
-		}
-
-		return res.json();
-	} catch (err: unknown) {
-		console.log(`error: ${err}`);
-		return null;
-		// `` are a special way of allowing JS inside a string
-		// Instead of "error: " + err, we can just do the above
-		// it is simular to formated strings in python --> f"{err}"
-	}
-}
-
-export default async function Blog({ params }: Props) {
-  const { slug } = await params;
-  const blog = await getBlog(slug);
-
-    
-    	{/* Check if blog exists */}
-		if (blog){
-            return (
-                <div>
-                    <h1>{blog.title}</h1>
-                    <p>{blog.date}</p>
-                    <p>{blog.description}</p>
-                    {blog.image && (
-                        <img src={blog.image} alt={blog.image_alt ?? blog.title} />
-                    )}
-                    <p>{blog.imageAlt}</p>
-            <       p>{blog.slug}</p>
-                    {blog.comments.map((comment: any, index: number) => (
-                        <Comment key={index} comment={comment} />
-                    ))}
-                </div>
-                );
-		}
-		return <p>Blog not found</p>;
-
-
-}

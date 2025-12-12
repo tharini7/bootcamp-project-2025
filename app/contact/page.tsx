@@ -1,23 +1,44 @@
-export const metadata = { title: "Tharini — Contact" };
-export default function Blog() {
+"use client";
+
+import { useRef } from "react";
+import emailjs from "@emailjs/browser";
+
+export default function ContactPage() {
+  const form = useRef<HTMLFormElement>(null);
+
+  const sendEmail = (e: any) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        "contact_service",
+        "contact_form",   
+        form.current!,
+        "rqr6eMG2g_762jUGK"
+      )
+      .then(() => {
+        alert("Email sent!");
+        })
+      .catch(() => {
+          alert("Error sending email");
+          }
+        );
+  };
+
   return (
-    <div>
-            <main>
-            <h1 className="contact-title">Contact Me</h1>
-            <form id="contact-form"></form>
-            <label htmlFor="name">Name</label>
-            <input type="text" id="name" />
+    <form ref={form} onSubmit={sendEmail}>
+      <input type="hidden" name="time" value={new Date().toLocaleString()} />
 
-            <label htmlFor="email">Email</label>
-            <input type="email" id="email" />
+      <label>Name</label>
+      <input type="text" name="name" required />
 
-            <label htmlFor="message">Message</label>
-            <input type="message" id="message" />
+      <label>Email</label>
+      <input type="email" name="email" required />
 
-            <input type="submit" />
-            </main>
-          
+      <label>Message</label>
+      <textarea name="message" required />
 
-    </div>
+      <input type="submit" value="Send" />
+    </form>
   );
 }

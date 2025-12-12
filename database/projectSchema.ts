@@ -6,8 +6,15 @@ type Project = {
     description: string;
     href: string;
     image: string;
+    comments: IComment[];
+    slug: string;
 };
 
+type IComment = {
+		user: string;
+		comment: string;
+		time: Date;
+}
 
 // mongoose schema 
 const projectSchema = new Schema<Project>({
@@ -15,6 +22,15 @@ const projectSchema = new Schema<Project>({
         href: { type: String, required: true },
 		description: { type: String, required: true },
 		image: { type: String, required: true },
+        comments: [
+			{
+				user: {type:String, required: true},
+				comment: {type : String, required: true},
+				time: {type: Date, required: true, default: new Date()}
+			}
+            ],
+        slug: { type: String, required: true },
+
 })
 
 // defining the collection and model
