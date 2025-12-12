@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/database/db";
 import ProjectSchema from "@/database/projectSchema";
 
-export async function GET(req: NextRequest, { params }: any) {
+export async function GET(req: NextRequest, {params}: {params: Promise<{ slug: any }>}) {
   await connectDB();
 
   const { slug } = await params;
